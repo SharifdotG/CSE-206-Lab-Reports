@@ -9,7 +9,7 @@ struct Node {
 
 struct Node* head = NULL;
 
-void firstInsert(int value) {
+void insertFirstPosition(int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->prev = NULL;
@@ -20,9 +20,9 @@ void firstInsert(int value) {
     head = newNode;
 }
 
-void betweenInsert(int value, int position) {
+void insertMiddlePosition(int value, int position) {
     if (position <= 1) {
-        firstInsert(value);
+        insertFirstPosition(value);
         return;
     }
 
@@ -50,7 +50,7 @@ void betweenInsert(int value, int position) {
     current->next = newNode;
 }
 
-void lastInsert(int value) {
+void insertLastPosition(int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = value;
     newNode->next = NULL;
@@ -67,7 +67,7 @@ void lastInsert(int value) {
     }
 }
 
-void firstDelete() {
+void deleteFirstElement() {
     if (head != NULL) {
         struct Node* temp = head;
         head = head->next;
@@ -78,9 +78,9 @@ void firstDelete() {
     }
 }
 
-void betweenDelete(int position) {
+void deleteMiddleElement(int position) {
     if (position <= 1) {
-        firstDelete();
+        deleteFirstElement();
         return;
     }
 
@@ -106,7 +106,7 @@ void betweenDelete(int position) {
     free(temp);
 }
 
-void lastDelete() {
+void deleteLastElement() {
     if (head == NULL) {
         printf("Cannot delete. List is empty.\n");
         return;
@@ -129,7 +129,7 @@ void lastDelete() {
     }
 }
 
-void nodeUpdate(int value, int position) {
+void update(int value, int position) {
     struct Node* current = head;
     int count = 1;
     while (current != NULL && count < position) {
@@ -144,7 +144,7 @@ void nodeUpdate(int value, int position) {
     }
 }
 
-void traversing() {
+void display() {
     struct Node* current = head;
     while (current != NULL) {
         printf("%d ", current->data);
@@ -174,41 +174,41 @@ int main() {
             case 1:
                 printf("Enter value to insert at the beginning: ");
                 scanf("%d", &value);
-                firstInsert(value);
+                insertFirstPosition(value);
                 break;
             case 2:
                 printf("Enter value to insert: ");
                 scanf("%d", &value);
                 printf("Enter position (1 for after the first node): ");
                 scanf("%d", &position);
-                betweenInsert(value, position);
+                insertMiddlePosition(value, position);
                 break;
             case 3:
                 printf("Enter value to insert at the end: ");
                 scanf("%d", &value);
-                lastInsert(value);
+                insertLastPosition(value);
                 break;
             case 4:
-                firstDelete();
+                deleteFirstElement();
                 break;
             case 5:
                 printf("Enter position (1 for the first node to delete after): ");
                 scanf("%d", &position);
-                betweenDelete(position);
+                deleteMiddleElement(position);
                 break;
             case 6:
-                lastDelete();
+                deleteLastElement();
                 break;
             case 7:
                 printf("Enter position of the node to update: ");
                 scanf("%d", &position);
                 printf("Enter the new value: ");
                 scanf("%d", &value);
-                nodeUpdate(value, position);
+                update(value, position);
                 break;
             case 8:
                 printf("Doubly Linked List: ");
-                traversing();
+                display();
                 break;
             case 9:
                 return 0;

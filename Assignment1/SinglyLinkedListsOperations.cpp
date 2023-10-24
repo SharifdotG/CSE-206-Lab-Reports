@@ -1,24 +1,22 @@
 #include <iostream>
 
-// Define a struct for singly linked list node
+using namespace std;
+
 struct Node {
     int data;
     Node* next;
 };
 
-// Initialize the head of the linked list
 Node* head = nullptr;
 
-// Function to insert a node at the beginning of the list
-void firstInsert(int value) {
+void insertFirstPosition(int value) {
     Node* newNode = new Node;
     newNode->data = value;
     newNode->next = head;
     head = newNode;
 }
 
-// Function to insert a node between the first and last nodes
-void betweenInsert(int value, int position) {
+void insertMiddlePosition(int value, int position) {
     Node* newNode = new Node;
     newNode->data = value;
     Node* current = head;
@@ -31,8 +29,7 @@ void betweenInsert(int value, int position) {
     current->next = newNode;
 }
 
-// Function to insert a node at the end of the list
-void lastInsert(int value) {
+void insertLastPosition(int value) {
     Node* newNode = new Node;
     newNode->data = value;
     newNode->next = nullptr;
@@ -47,8 +44,7 @@ void lastInsert(int value) {
     }
 }
 
-// Function to delete the first node
-void firstDelete() {
+void deleteFirstElement() {
     if (head != nullptr) {
         Node* temp = head;
         head = head->next;
@@ -56,10 +52,9 @@ void firstDelete() {
     }
 }
 
-// Function to delete a node between the first and last nodes
-void betweenDelete(int position) {
+void deleteMiddleElement(int position) {
     if (position == 1) {
-        firstDelete();
+        deleteFirstElement();
         return;
     }
 
@@ -71,7 +66,7 @@ void betweenDelete(int position) {
     }
 
     if (current->next == nullptr || current->next->next == nullptr) {
-        std::cout << "Cannot delete. Node not found." << std::endl;
+        cout << "Cannot delete. Node not found." << endl;
         return;
     }
 
@@ -80,10 +75,9 @@ void betweenDelete(int position) {
     delete temp;
 }
 
-// Function to delete the last node
-void lastDelete() {
+void deleteLastElement() {
     if (head == nullptr) {
-        std::cout << "Cannot delete. List is empty." << std::endl;
+        cout << "Cannot delete. List is empty." << endl;
         return;
     }
 
@@ -100,8 +94,7 @@ void lastDelete() {
     }
 }
 
-// Function to update the value of a node at a given position
-void nodeUpdate(int value, int position) {
+void update(int value, int position) {
     Node* current = head;
     int count = 1;
     while (current != nullptr && count < position) {
@@ -112,81 +105,80 @@ void nodeUpdate(int value, int position) {
     if (current != nullptr) {
         current->data = value;
     } else {
-        std::cout << "Node not found at position " << position << ". Update failed." << std::endl;
+        cout << "Node not found at position " << position << ". Update failed." << endl;
     }
 }
 
-// Function to traverse and print the linked list
-void traversing() {
+void display() {
     Node* current = head;
     while (current != nullptr) {
-        std::cout << current->data << " ";
+        cout << current->data << " ";
         current = current->next;
     }
-    std::cout << std::endl;
+    cout << endl;
 }
 
 int main() {
     int choice, value, position;
 
     while (true) {
-        std::cout << "Singly Linked List Operations:" << std::endl;
-        std::cout << "1. Insertion (First)" << std::endl;
-        std::cout << "2. Insertion (Between first & last)" << std::endl;
-        std::cout << "3. Insertion (Last)" << std::endl;
-        std::cout << "4. Delete (First)" << std::endl;
-        std::cout << "5. Delete (Between first & last)" << std::endl;
-        std::cout << "6. Delete (Last)" << std::endl;
-        std::cout << "7. Update" << std::endl;
-        std::cout << "8. Traverse" << std::endl;
-        std::cout << "9. Exit" << std::endl;
-        std::cout << "Enter your choice: ";
-        std::cin >> choice;
+        cout << "\nSingly Linked List Operations:" << endl;
+        cout << "1. Insertion (First)" << endl;
+        cout << "2. Insertion (Between first & last)" << endl;
+        cout << "3. Insertion (Last)" << endl;
+        cout << "4. Delete (First)" << endl;
+        cout << "5. Delete (Between first & last)" << endl;
+        cout << "6. Delete (Last)" << endl;
+        cout << "7. Update" << endl;
+        cout << "8. Display" << endl;
+        cout << "9. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
 
         switch (choice) {
             case 1:
-                std::cout << "Enter value to insert at the beginning: ";
-                std::cin >> value;
-                firstInsert(value);
+                cout << "Enter value to insert at the beginning: ";
+                cin >> value;
+                insertFirstPosition(value);
                 break;
             case 2:
-                std::cout << "Enter value to insert: ";
-                std::cin >> value;
-                std::cout << "Enter position (1 for after the first node): ";
-                std::cin >> position;
-                betweenInsert(value, position);
+                cout << "Enter value to insert: ";
+                cin >> value;
+                cout << "Enter position (1 for after the first node): ";
+                cin >> position;
+                insertMiddlePosition(value, position);
                 break;
             case 3:
-                std::cout << "Enter value to insert at the end: ";
-                std::cin >> value;
-                lastInsert(value);
+                cout << "Enter value to insert at the end: ";
+                cin >> value;
+                insertLastPosition(value);
                 break;
             case 4:
-                firstDelete();
+                deleteFirstElement();
                 break;
             case 5:
-                std::cout << "Enter position (1 for the first node to delete after): ";
-                std::cin >> position;
-                betweenDelete(position);
+                cout << "Enter position (1 for the first node to delete after): ";
+                cin >> position;
+                deleteMiddleElement(position);
                 break;
             case 6:
-                lastDelete();
+                deleteLastElement();
                 break;
             case 7:
-                std::cout << "Enter position of the node to update: ";
-                std::cin >> position;
-                std::cout << "Enter the new value: ";
-                std::cin >> value;
-                nodeUpdate(value, position);
+                cout << "Enter position of the node to update: ";
+                cin >> position;
+                cout << "Enter the new value: ";
+                cin >> value;
+                update(value, position);
                 break;
             case 8:
-                std::cout << "Linked List: ";
-                traversing();
+                cout << "Linked List: ";
+                display();
                 break;
             case 9:
                 return 0;
             default:
-                std::cout << "Invalid choice. Please try again." << std::endl;
+                cout << "Invalid choice. Please try again." << endl;
         }
     }
 
