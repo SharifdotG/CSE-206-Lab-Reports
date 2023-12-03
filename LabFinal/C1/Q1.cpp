@@ -37,11 +37,17 @@ void undo() {
 int main() {
     currentText = "";
 
-    insert("Hello, ");
-    insert("world!");
+    insert("My Name is: ");
+    insert("Sharif :3");
     print();
 
     deleteLast();
+    print();
+
+    deleteLast();
+    print();
+
+    undo();
     print();
 
     undo();
